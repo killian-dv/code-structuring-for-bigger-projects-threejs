@@ -1,0 +1,20 @@
+import * as THREE from "three";
+import Experience from "../experience.js";
+import Environment from "./environment.js";
+
+export default class World {
+  constructor() {
+    this.experience = new Experience();
+    this.scene = this.experience.scene;
+
+    // test mesh
+    const testMesh = new THREE.Mesh(
+      new THREE.BoxGeometry(1, 1, 1),
+      new THREE.MeshStandardMaterial(),
+    );
+    this.scene.add(testMesh);
+
+    // setup
+    this.environment = new Environment();
+  }
+}
