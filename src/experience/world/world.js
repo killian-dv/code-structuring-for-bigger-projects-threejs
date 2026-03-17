@@ -6,6 +6,7 @@ export default class World {
   constructor() {
     this.experience = new Experience();
     this.scene = this.experience.scene;
+    this.resources = this.experience.resources;
 
     // test mesh
     const testMesh = new THREE.Mesh(
@@ -14,7 +15,8 @@ export default class World {
     );
     this.scene.add(testMesh);
 
-    // setup
-    this.environment = new Environment();
+    this.resources.on("ready", () => {
+      this.environment = new Environment();
+    });
   }
 }
