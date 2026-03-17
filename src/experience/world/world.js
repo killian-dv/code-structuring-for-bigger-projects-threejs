@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import Experience from "../experience.js";
 import Environment from "./environment.js";
+import Floor from "./floor.js";
 
 export default class World {
   constructor() {
@@ -16,6 +17,7 @@ export default class World {
     this.scene.add(testMesh);
 
     this.resources.on("ready", () => {
+      this.floor = new Floor();
       this.environment = new Environment();
     });
   }
