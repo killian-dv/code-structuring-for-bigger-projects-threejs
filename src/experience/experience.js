@@ -6,6 +6,7 @@ import Sizes from "./utils/sizes.js";
 import Time from "./utils/time.js";
 import World from "./world/world.js";
 import sources from "./sources.js";
+import Debug from "./utils/debug.js";
 
 let instance = null;
 
@@ -20,6 +21,7 @@ export default class Experience {
     this.canvas = canvas;
 
     // Setup
+    this.debug = new Debug();
     this.sizes = new Sizes();
     this.time = new Time();
     this.scene = new THREE.Scene();
