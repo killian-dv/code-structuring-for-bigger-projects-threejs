@@ -1,67 +1,43 @@
-# Realistic Render — Three.js Journey
+# Code Structuring for Bigger Projects — Three.js Journey
 
-Quick recap of the **Realistic Render** lesson from [Three.js Journey](https://threejs-journey.com/) by Bruno Simon.
+Quick recap of the **Code structuring for bigger projects** lesson from [Three.js Journey](https://threejs-journey.com/) by Bruno Simon.
 
 ---
 
 ## What This Lesson Covers
 
-Building a more photorealistic scene in Three.js using **environment maps**, **PBR materials**, **shadows**, and **tone mapping**.
+How to structure a growing Three.js project so the code stays readable, maintainable, and easy to scale.
 
 ---
 
 ## Key Learnings
 
-### 1. Environment maps (IBL)
+### 1. Splitting code into classes
 
-- **`scene.environment`** — Image-Based Lighting: reflections and ambient lighting on materials.
-- **`scene.background`** — The visible sky/background (can use the same texture).
-- **Equirectangular** format: single 360° image + `EquirectangularReflectionMapping`.
-- **`scene.environmentIntensity`** — Controls how strong the environment lighting is.
+- Separate responsibilities (scene, camera, renderer, resources, world, etc.).
+- Avoid monolithic files that become hard to maintain.
+- Keep logic encapsulated in clear, single-responsibility classes.
 
-### 2. Directional light & shadows
+### 2. Organizing code into modules
 
-- **DirectionalLight** — Sun-like light with position and target; controls intensity and position.
-- **Shadows** — Enable on the light (`castShadow`) and the renderer (`shadowMap.enabled`).
-- **Shadow map** — `shadow.mapSize` (e.g. 512×512), `shadow.camera.far` for range.
-- **Bias / normalBias** — Reduces shadow acne and peter-panning; tune per scene.
-- **`PCFSoftShadowMap`** — Softer shadow edges.
-- **Meshes** — Set `castShadow` and `receiveShadow` on objects that should cast/receive shadows.
-- **CameraHelper** — Visualize the shadow camera frustum for debugging.
+- Structure files by feature and purpose.
+- Import only what is needed in each module.
+- Build a cleaner architecture that is easier to evolve over time.
 
-### 3. Tone mapping
+### 3. Improving long-term maintainability
 
-- Converts HDR values to the display range (0–1).
-- **`renderer.toneMapping`** — e.g. `ReinhardToneMapping`, or `ACESFilmicToneMapping`, `CineonToneMapping`, etc.
-- **`renderer.toneMappingExposure`** — Brightness of the final image (often between 1 and 3).
-
-### 4. PBR materials & textures
-
-- **MeshStandardMaterial** — Physically based (metalness/roughness).
-- **Texture channels**:
-  - **map** — Base color (albedo).
-  - **normalMap** — Surface detail (bump).
-  - **aoMap** — Ambient occlusion (shadows in crevices).
-  - **roughnessMap** — Roughness (often from ARM/ORM texture).
-  - **metalnessMap** — Metalness (often from ARM/ORM texture).
-- **ARM / ORM textures** — Single texture for Ambient occlusion, Roughness, Metalness (R, G, B).
-- **Color space** — Use `THREE.SRGBColorSpace` for color textures (e.g. `map`).
-
-### 5. GLTF models
-
-- **GLTFLoader** — Load `.gltf` / `.glb` models.
-- After loading, traverse the scene and set **castShadow** / **receiveShadow** on meshes so they integrate with your lighting and shadows.
-
-### 6. Renderer settings
-
-- **`antialias: true`** — Smoother edges.
+- Make the project easier to read and revisit later.
+- Add new features with less friction.
+- Reduce side effects when changing one part of the codebase.
 
 ---
 
 ## Project setup
 
-- **Vite** + **Three.js** + **lil-gui** for tweaking parameters in real time.
-- Run: `npm run dev`
+- **Vite** + **Three.js** + **lil-gui** for real-time parameter tweaking.
+- Run:
+  - `npm install`
+  - `npm run dev`
 
 ---
 
